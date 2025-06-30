@@ -16,7 +16,7 @@ export default function AchievementsScreen() {
     currentStep,
     getProgressPercentage,
     resetState,
-    state 
+    isPeakUsage
   } = useEnhancedVideoGeneration();
   
   const [selectedFormat, setSelectedFormat] = useState<'square' | 'vertical' | 'horizontal'>('square');
@@ -187,9 +187,9 @@ export default function AchievementsScreen() {
             
             <View style={styles.estimateContainer}>
               <Text style={styles.estimateText}>
-                Expected: {state.isPeakUsage ? '3-6 minutes' : '1-2 minutes'}
+                Expected: {isPeakUsage ? '3-6 minutes' : '1-2 minutes'}
               </Text>
-              {state.isPeakUsage && (
+              {isPeakUsage && (
                 <Text style={styles.peakUsageHint}>
                   💡 Using fast generation (1080p). Try off-peak hours for even faster processing.
                 </Text>
@@ -256,7 +256,7 @@ export default function AchievementsScreen() {
               {/* Progress Bar */}
               {isGenerating && generatingAchievementId === achievement.id && (
                 <View style={styles.progressContainer}>
-                  {state.isPeakUsage && (
+                  {isPeakUsage && (
                     <View style={styles.peakUsageWarning}>
                       <Text style={styles.peakUsageText}>⏰ Peak Usage Detected</Text>
                       <Text style={styles.peakUsageSubtext}>
@@ -275,7 +275,7 @@ export default function AchievementsScreen() {
                   <Text style={styles.progressText}>
                     {currentStep === 'initializing' && 'Initializing...'}
                     {currentStep === 'processing' && 'Processing with AI...'}
-                    {currentStep === 'processing' && state.isPeakUsage && 'Waiting in queue - peak usage detected...'}
+                    {currentStep === 'processing' && isPeakUsage && 'Waiting in queue - peak usage detected...'}
                     {currentStep === 'finalizing' && 'Finalizing video...'}
                     {currentStep === 'completed' && 'Completed!'}
                     {currentStep === 'failed' && 'Failed'}
