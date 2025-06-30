@@ -31,6 +31,10 @@ export default function ProfileTab() {
     );
   };
 
+  const handleSettingsPress = () => {
+    router.push('/settings');
+  };
+
   if (!user) {
     return (
       <View style={styles.authContainer}>
@@ -57,7 +61,7 @@ export default function ProfileTab() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Profile</Text>
-        <TouchableOpacity style={styles.settingsButton}>
+        <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsPress}>
           <Settings size={24} color="#6B7280" />
         </TouchableOpacity>
       </View>
